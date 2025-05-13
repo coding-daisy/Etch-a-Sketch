@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
     <script src="script.js" defer></script>
-</head>
-<body>
-    <div id="sketchArea">
+  </head>
+  <body>
+    <div id="mainArea">
+      <div id="layoutCustomizingArea">
+        <div>Choose the layout for your drawing canvas!</div>
+        <div class="inputArea">
+          <div>
+            <input id="rowInput" autocomplete="off" />
+            rows
+          </div>
+          <div>
+            <input id="columnInput" autocomplete="off" />
+            columns
+          </div>
+        </div>
+      </div>
+
+      <div id="sketchArea"></div>
     </div>
-</body>
+  </body>
 </html>
