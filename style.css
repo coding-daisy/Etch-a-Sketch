@@ -51,5 +51,29 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    background-color: rgba(0, 0, 255, 0.2);
+    background-color: rgba(0, 0, 255, 0.15);
+}
+
+#colorPaletteArea {
+    display: flex;
+    gap: 5px;
+    width: 40%;
+}
+
+.colorOption {
+    flex: 1;
+    aspect-ratio: 1;
+    border: 3px solid rgb(86, 86, 86);
+    border-radius: 10%;
+    position: relative;
+}
+
+.colorOption:hover::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 255, 0.15);
 }

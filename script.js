@@ -2,6 +2,7 @@ const sketchArea = document.querySelector("#sketchArea");
 const rowInput = document.querySelector("#rowInput");
 const columnInput = document.querySelector("#columnInput");
 const inputArea = document.querySelector("#layoutCustomizingArea .inputArea");
+const colorPaletteArea = document.querySelector("#colorPaletteArea");
 
 let rows = 10;
 let columns = 10;
@@ -17,6 +18,15 @@ const colorSelection = [
 ];
 
 let selectedColor = colorSelection[0];
+
+function createColorPalette() {
+    for (let color of colorSelection) {
+        let colorOption = document.createElement("div");
+        colorOption.classList.add("colorOption");
+        colorOption.style.backgroundColor = color;
+        colorPaletteArea.appendChild(colorOption);
+    }
+}
 
 function createSketchGrid() {
   sketchArea.innerHTML = "";
@@ -59,6 +69,12 @@ inputArea.addEventListener("keydown", (event) => {
   }
 });
 
+function resetInput() {
+    rowInput.value = rows;
+    columnInput.value = columns;
+  }
+
+
 // tracking if shift key is pressed, so that combination with 'hover'-event is possible
 document.addEventListener("keydown", (event) => {
   if (event.key === "Shift") {
@@ -84,10 +100,8 @@ sketchArea.addEventListener("mouseover", (event) => {
   }
 });
 
-function resetInput() {
-  rowInput.value = rows;
-  columnInput.value = columns;
-}
+
 
 createSketchGrid();
 resetInput();
+createColorPalette();
