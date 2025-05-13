@@ -17,15 +17,31 @@ const colorSelection = [
   "transparent",
 ];
 
+let selectedColorOption;
 let selectedColor = colorSelection[0];
 
 function createColorPalette() {
-    for (let color of colorSelection) {
-        let colorOption = document.createElement("div");
-        colorOption.classList.add("colorOption");
-        colorOption.style.backgroundColor = color;
-        colorPaletteArea.appendChild(colorOption);
+  for (let i = 0; i < colorSelection.length; i++) {
+    let colorOption = document.createElement("div");
+    let colorOptionWrapper = document.createElement("div");
+    colorOption.classList.add("colorOption");
+    colorOptionWrapper.classList.add("colorOptionWrapper");
+    colorOption.style.backgroundColor = colorSelection[i];
+    colorPaletteArea.appendChild(colorOptionWrapper)
+    colorOptionWrapper.appendChild(colorOption);
+    if (i === 0) {
+      selectedColorOption = colorOption;
     }
+  }
+
+  colorPaletteArea.addEventListener("click", (event) => {
+    if (event.target.id !== "colorPaletteArea") {
+      selectedColorOption.classList.remove("selectedColorOption");
+      selectedColor = event.target.style.backgroundColor;
+      selectedColorOption = event.target;
+      selectedColorOption.classList.add("selectedColorOption");
+    }
+  });
 }
 
 function createSketchGrid() {
@@ -70,10 +86,9 @@ inputArea.addEventListener("keydown", (event) => {
 });
 
 function resetInput() {
-    rowInput.value = rows;
-    columnInput.value = columns;
-  }
-
+  rowInput.value = rows;
+  columnInput.value = columns;
+}
 
 // tracking if shift key is pressed, so that combination with 'hover'-event is possible
 document.addEventListener("keydown", (event) => {
@@ -100,8 +115,11 @@ sketchArea.addEventListener("mouseover", (event) => {
   }
 });
 
+function initialize() {
+  createSketchGrid();
+  resetInput();
+  createColorPalette();
+  selectedColorOption.classList.add("selectedColorOption");
+}
 
-
-createSketchGrid();
-resetInput();
-createColorPalette();
+initialize();
