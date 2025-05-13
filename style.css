@@ -42,3 +42,14 @@
     border: 1px solid grey;
     position: relative;
 }
+
+
+.cell:hover::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 255, 0.2);
+}

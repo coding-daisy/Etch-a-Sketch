@@ -3,10 +3,20 @@ const rowInput = document.querySelector("#rowInput");
 const columnInput = document.querySelector("#columnInput");
 const inputArea = document.querySelector("#layoutCustomizingArea .inputArea");
 
-
 let rows = 10;
 let columns = 10;
 const gridSize = Math.floor(window.innerWidth / 2);
+let isShiftPressed = false;
+const colorSelection = [
+  "rgb(191,155,153)",
+  "rgb(215,195,178)",
+  "rgb(238,230,211)",
+  "rgb(196,219,208)",
+  "rgb(179,204,206)",
+  "transparent",
+];
+
+let selectedColor = colorSelection[0];
 
 function createSketchGrid() {
   sketchArea.innerHTML = "";
@@ -49,12 +59,35 @@ inputArea.addEventListener("keydown", (event) => {
   }
 });
 
+// tracking if shift key is pressed, so that combination with 'hover'-event is possible
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Shift") {
+    isShiftPressed = true;
+  }
+});
+
+document.addEventListener("keyup", (event) => {
+  if (event.key === "Shift") {
+    isShiftPressed = false;
+  }
+});
+
+sketchArea.addEventListener("mouseover", (event) => {
+  const ElementToBeColored = event.target;
+
+  // prevent main sketching area from being colored
+  if (ElementToBeColored.id !== "sketchArea") {
+    // coloring takes place if shift is pressed
+    if (isShiftPressed) {
+      ElementToBeColored.style.backgroundColor = selectedColor;
+    }
+  }
+});
+
 function resetInput() {
   rowInput.value = rows;
   columnInput.value = columns;
 }
-
-
 
 createSketchGrid();
 resetInput();
